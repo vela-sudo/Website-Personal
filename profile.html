@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kontak - Vela</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Zeyada&display=swap" rel="stylesheet">
+  <style>
+    body {
+  padding-top: 56px; /* supaya konten tidak tertutup navbar fixed */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  margin: 0;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+    body.dark-mode {
+      background-color: #121212;
+      color: #ddd;
+    }
+    .header-name {
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: #2c3e50;
+      text-align: center;
+      transition: color 0.5s;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+    body.dark-mode .header-name {
+      color: #ddd;
+      text-shadow: 0 0 10px rgba(2, 82, 255, 0.6);
+    }
+    .header-subtitle {
+      font-size: 1.2rem;
+      color: #555;
+      text-align: center;
+      margin-bottom: 20px;
+      transition: color 0.5s;
+    }
+    body.dark-mode .header-subtitle {
+      color: #bbb;
+    }
+    hr.separator {
+      width: 60%;
+      margin: 0 auto 40px auto;
+      border-top: 2px solid #2c3e50;
+      opacity: 0.6;
+      transition: border-color 0.5s;
+    }
+    body.dark-mode hr.separator {
+      border-color: #555;
+    }
+    .content-box {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+      height: 100%;
+      transition: background 0.5s, box-shadow 0.5s;
+    }
+    body.dark-mode .content-box {
+      background: #1e1e1e;
+      box-shadow: 0 4px 12px rgb(255 255 255 / 0.1);
+    }
+    h3.section-title {
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      border-bottom: 2px solid #2c3e50;
+      padding-bottom: 5px;
+      width: fit-content;
+      transition: color 0.5s, border-color 0.5s;
+    }
+    body.dark-mode h3.section-title {
+      color: #ddd;
+      border-color: #bbb;
+    }
+    /* Skill & progress bar styling */
+    .skill-name {
+      color: #2c3e50;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 1rem;
+      transition: color 0.5s;
+    }
+    body.dark-mode .skill-name {
+      color: #ddd;
+    }
+    .progress-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .progress-bar {
+      flex-grow: 1;
+      height: 12px;
+      background-color: #e0e0e0; /* abu-abu muda */
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    body.dark-mode .progress-bar {
+      background-color: #333;
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(270deg, #3b82f6, #60a5fa, #3b82f6);
+      background-size: 400% 400%;
+      border-radius: 8px;
+      animation: progress-grow 2s ease forwards;
+    }
+    @keyframes progress-grow {
+      from { width: 0; }
+      to { width: var(--progress); }
+    }
+    .progress-percent {
+      width: 40px;
+      text-align: right;
+      font-weight: 600;
+      color: #2c3e50;
+      user-select: none;
+      font-size: 0.9rem;
+      min-width: 35px;
+      font-variant-numeric: tabular-nums;
+      transition: color 0.5s;
+    }
+    body.dark-mode .progress-percent {
+      color: #ddd;
+    }
+    /* Foto galeri */
+    .gallery {
+      margin-top: 40px;
+    }
+    .gallery img {
+      border-radius: 10px;
+      object-fit: cover;
+      width: 100%;
+      height: 200px;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery-img:hover,
+    .crop-moderator:hover,
+    .crop-pengajar:hover {
+      transform: scale(1.05);
+    }
+    p.fw-semibold {
+      color: #2c3e50;
+      font-weight: 600;
+      margin-top: 8px;
+      font-size: 0.95rem;
+      transition: color 0.5s;
+    }
+    body.dark-mode p.fw-semibold {
+      color: #ddd;
+    }
+    .crop-moderator {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      object-position: center 80%;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .crop-pengajar {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      object-position: center 70%;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    /* Toggle Mode Siang/Malam */
+  .toggle-switch {
+  position: relative;
+  width: 70px; /* Lebih longgar dari sebelumnya */
+  height: 30px;
+  background: #eee;
+  border-radius: 30px;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8px; /* padding kiri kanan agar icon ada ruang */
+  transition: background-color 0.3s;
+}
+
+body.dark-mode .toggle-switch {
+  background: #444;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+input:checked + .slider {
+  transform: translateX(36px); /* Geser lebih jauh agar slider tidak nempel ikon kanan */
+}
+
+.icons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  pointer-events: none; /* supaya klik lewat toggle, bukan icon */
+  user-select: none;
+  padding: 0 5px;
+  z-index: 1;
+}
+
+.icon.sun {
+  color: #f39c12;
+  transition: color 0.3s;
+}
+
+.icon.moon {
+  color: #999;
+  transition: color 0.3s;
+}
+
+ body.dark-mode .nav-link {
+      color: #ddd !important;
+    }
+    body.dark-mode .nav-link.active {
+      color: #0a459c !important;
+      font-weight: 600;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html" style="font-family: 'Zeyada', cursive; font-size: 30px;">portofolio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="profile.html">Profil</a></li>
+        <li class="nav-item"><a class="nav-link" href="project.html">Projek</a></li>
+        <li class="nav-item"><a class="nav-link" href="kontak.html" aria-current="page">Kontak</a></li>
+        
+        <!-- Toggle Mode sebagai item navbar -->
+        <li class="nav-item d-flex align-items-center ms-3">
+  <label class="toggle-switch mb-0" aria-label="Toggle dark mode">
+    <input type="checkbox" id="modeToggle" />
+    <span class="slider"></span>
+    <div class="icons">
+      <span class="icon sun" aria-hidden="true">🌞</span>
+      <span class="icon moon" aria-hidden="true">🌙</span>
+    </div>
+  </label>
+</li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Header nama dan fakultas -->
+<div class="container mt-4">
+  <div class="header-name">VELA RIYANI AGUSTIN</div>
+  <div class="header-subtitle">Fakultas Ilmu Komputer Program Studi Informatika (S1)</div>
+  <hr class="separator" />
+</div>
+
+<!-- Konten utama dua kolom -->
+<div class="container mb-5">
+  <div class="row g-4">
+    <!-- Kiri: Tentang & Pengalaman -->
+    <div class="col-md-7">
+      <div class="content-box">
+        <section class="mb-4">
+          <h3 class="section-title">Tentang Saya</h3>
+          <p>Saya mahasiswa informatika dengan minat kuat di machine learning dan pengolahan citra. Sudah belajar dan mencoba beberapa model deep learning untuk klasifikasi, khususnya deteksi anemia dari gambar. Selain itu saya juga paham dasar web development dan pemrograman Python. Saya terbuka untuk belajar hal baru dan ingin terus mengembangkan kemampuan saya di bidang data dan AI.</p>
+        </section>
+
+        <section>
+          <h3 class="section-title">Pengalaman</h3>
+          <div class="mb-3">
+            <strong>Sekretaris</strong> <em>(2023 – 2025)</em><br />
+            LDK IMAM Universitas Amikom Purwokerto
+            <ul>
+              <li>Mengelola administrasi dan laporan kegiatan.</li>
+              <li>Mengkoordinasikan komunikasi antara panitia dan peserta.</li>
+              <li>Mengatur dan menyimpan data peserta atau panitia acara.</li>
+              <li>Membantu menyusun jadwal kegiatan dan memastikan semuanya berjalan sesuai rencana.</li>
+            </ul>
+          </div>
+          <div>
+            <strong>Forum Asisten</strong> <em>(2024 – 2025)</em><br />
+            Semester Genap dan Ganjil
+            <ul>
+              <li>Membantu mahasiswa memahami materi dosen.</li>
+              <li>Membantu proses praktikum mahasiswa.</li>
+              <li>Mengawasi praktikum di laboratorium.</li>
+              <li>Membantu mahasiswa saat mengalami kesulitan praktikum.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Kanan: Skills & Software -->
+    <div class="col-md-5">
+      <div class="content-box">
+        <section>
+          <h3 class="section-title">Skill & Software</h3>
+          <ul class="list-unstyled">
+            <li>
+              <div class="skill-name">Microsoft Word</div>
+              <div class="progress-container">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="--progress: 90%;"></div>
+                </div>
+                <div class="progress-percent" data-target="90">0%</div>
+              </div>
+            </li>
+            <li>
+              <div class="skill-name">Microsoft Excel</div>
+              <div class="progress-container">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="--progress: 80%;"></div>
+                </div>
+                <div class="progress-percent" data-target="80">0%</div>
+              </div>
+            </li>
+            <li>
+              <div class="skill-name">SQL Server</div>
+              <div class="progress-container">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="--progress: 75%;"></div>
+                </div>
+                <div class="progress-percent" data-target="75">0%</div>
+              </div>
+            </li>
+            <li>
+              <div class="skill-name">PHP MyAdmin</div>
+              <div class="progress-container">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="--progress: 70%;"></div>
+                </div>
+                <div class="progress-percent" data-target="70">0%</div>
+              </div>
+            </li>
+            <li>
+              <div class="skill-name">Dasar Machine Learning</div>
+              <div class="progress-container">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="--progress: 60%;"></div>
+                </div>
+                <div class="progress-percent" data-target="60">0%</div>
+              </div>
+            </li>
+            <li>
+              <div class="skill-name">Design dasar Canva</div>
+              <div class="progress-container">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="--progress: 55%;"></div>
+                </div>
+                <div class="progress-percent" data-target="55">0%</div>
+              </div>
+            </li>
+            <li>
+              <div class="skill-name">Dasar Web Developer</div>
+              <div class="progress-container">
+                <div class="progress-bar">
+                  <div class="progress-fill" style="--progress: 50%;"></div>
+                </div>
+                <div class="progress-percent" data-target="50">0%</div>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Galeri Foto Kegiatan -->
+<div class="container gallery">
+  <h3 class="section-title mb-4 text-center">Foto Kegiatan Kampus</h3>
+  <div class="row g-4">
+    <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+      <img src="img/moderator.jpg" alt="Moderator" class="crop-moderator" />
+      <p class="mt-2 text-center fw-semibold">Moderator acara seminar mahasiswa tahun 2025</p>
+    </div>
+
+    <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+      <img src="img/pelantikan asisten.jpg" alt="Pelantikan Asisten" class="gallery-img" />
+      <p class="mt-2 text-center fw-semibold">Pelantikan asisten laboratorium komputer semester genap</p>
+    </div>
+
+    <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+      <img src="img/asisten kelas.jpg" alt="Asisten Kelas" class="gallery-img" />
+      <p class="mt-2 text-center fw-semibold">Waktu menjadi asisten kelas praktikum bersama dengan teman-teman</p>
+    </div>
+
+    <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+      <img src="img/pengajar smp.jpg" alt="Pengajar SMP" class="crop-pengajar" />
+      <p class="mt-2 text-center fw-semibold">Pengajar tambahan di SMP3 Muhammadiyah Purwokerto kegiatan LDK IMAM</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Animasi progress bar persentase
+  document.addEventListener('DOMContentLoaded', () => {
+    const progressPercents = document.querySelectorAll('.progress-percent');
+    progressPercents.forEach(el => {
+      const target = +el.getAttribute('data-target');
+      let count = 0;
+      const duration = 2000; // durasi animasi ms
+      const stepTime = Math.max(Math.floor(duration / target), 10);
+
+      const progressFill = el.previousElementSibling.querySelector('.progress-fill');
+      progressFill.style.width = '0'; // reset supaya animasi bisa jalan ulang
+
+      // Trigger CSS animation by reflow
+      void progressFill.offsetWidth;
+
+      progressFill.style.setProperty('--progress', target + '%');
+      progressFill.style.animation = 'progress-grow 2s ease forwards';
+
+      const timer = setInterval(() => {
+        count++;
+        el.textContent = count + '%';
+        if (count >= target) {
+          clearInterval(timer);
+        }
+      }, stepTime);
+    });
+  });
+
+  // Toggle mode malam/siang
+  const toggle = document.getElementById('modeToggle');
+  if (localStorage.getItem('mode') === 'dark') {
+    document.body.classList.add('dark-mode');
+    toggle.checked = true;
+  }
+  toggle.addEventListener('change', () => {
+    if (toggle.checked) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('mode', 'dark');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('mode', 'light');
+    }
+  });
+</script>
+
+</body>
+</html>

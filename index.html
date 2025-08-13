@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Website Pribadi Vela - Profil, Projek & Kontak</title>
+  <meta name="description" content="Website pribadi Vela - Profil, Projek, dan Kontak">
+  <meta property="og:title" content="Website Vela">
+  <meta property="og:description" content="Selamat datang di website pribadi Vela">
+  
+  <!-- CSS & Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Stardos+Stencil:wght@400;700&family=Telma:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Zeyada&display=swap" rel="stylesheet">
+
+  <style>
+    /* Base Styles */
+    body, html {
+      height: 100%;
+      margin: 0;
+      overflow-x: hidden;
+      position: relative;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      background: #000;
+    }
+    
+    /* Loader */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease;
+    }
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #7fa3f0;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    /* Main Content */
+    #bg-canvas {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      background: transparent;
+      display: block;
+    }
+    
+    .welcome-section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 0 20px;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .welcome-section img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.4);
+      animation: float 3s ease-in-out infinite;
+      border: 3px solid rgba(255,255,255,0.2);
+    }
+    
+    .welcome-text {
+      font-size: 3rem;
+      font-weight: bold;
+      font-family: 'Zeyada', cursive;
+      background: linear-gradient(45deg, #fbfbfc, #f8f7f7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+      margin-bottom: 30px;
+      position: relative;
+      padding: 0 40px;
+    }
+    
+    /* Wrapping Divider Styles */
+    .welcome-text::before,
+    .welcome-text::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      height: 2px;
+      width: 40px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    
+    .welcome-text::before {
+      left: 0;
+      transform: translateX(0);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8));
+    }
+    
+    .welcome-text::after {
+      right: 0;
+      transform: translateX(0);
+      background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+    }
+    
+    .divider-animate .welcome-text::before {
+      transform: translateX(-30px);
+      opacity: 0.8;
+    }
+    
+    .divider-animate .welcome-text::after {
+      transform: translateX(30px);
+      opacity: 0.8;
+    }
+    
+    .btn-group-custom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 20;
+    }
+    
+    .btn-group-custom > a {
+      color: white !important;
+      background-color: transparent !important;
+      border: 2px solid rgba(255,255,255,0.3) !important;
+      margin: 0;
+      padding: 12px 25px;
+      border-radius: 50px !important;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      text-decoration: none;
+      position: relative;
+      z-index: 10;
+      font-weight: 500;
+      overflow: hidden;
+    }
+    
+    .btn-group-custom > a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      border-color: rgba(255,255,255,0.6) !important;
+    }
+    
+    /* Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .welcome-text {
+        font-size: 2rem;
+        padding: 0 20px;
+      }
+      
+      .welcome-section img {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .btn-group-custom > a {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+      
+      .btn-group-custom {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .divider-animate .welcome-text::before {
+        transform: translateX(-15px);
+      }
+      
+      .divider-animate .welcome-text::after {
+        transform: translateX(15px);
+      }
+    }
+    
+    /* Planet Animation Styles */
+    .planet {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0);
+      animation: popIn 0.5s ease forwards, floatPlanet 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+      z-index: 15;
+    }
+    
+    @keyframes popIn {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+      60% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+    
+    @keyframes floatPlanet {
+      0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+      50% { transform: translate(-50%, -55%) scale(1.05) rotate(5deg); }
+    }
+    
+    /* Ripple effect */
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader">
+    <div class="loader-spinner"></div>
+  </div>
+  
+  <!-- Main Content -->
+  <section class="welcome-section">
+    <img src="img/AMPU0209-removebg-preview.png" alt="Foto Profil Vela" />
+    <h1 class="welcome-text">Selamat Datang di Portofolio saya</h1>
+    
+    <nav class="btn-group-custom" aria-label="Main navigation">
+      <a href="profile.html" class="btn btn-light btn-lg" aria-label="Profil">Profil</a>
+      <a href="project.html" class="btn btn-primary btn-lg" aria-label="Projek">Projek</a>
+      <a href="kontak.html" class="btn btn-success btn-lg" aria-label="Kontak">Kontak</a>
+    </nav>
+  </section>
+  
+  <canvas id="bg-canvas"></canvas>
+  
+  <!-- JavaScript -->
+  <script>
+    // Hide loader when page loads
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.querySelector('.loader').style.opacity = '0';
+        setTimeout(function() {
+          document.querySelector('.loader').style.display = 'none';
+        }, 500);
+      }, 1000);
+    });
+    
+    // Canvas Animation
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    let width, height;
+    let animationId;
+    let points = [];
+    const mouse = { x: null, y: null };
+    const maxSpeed = 0.3;
+    const pointsCount = 50;
+    
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    
+    function initPoints() {
+      points = [];
+      for(let i = 0; i < pointsCount; i++) {
+        points.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.15,
+          vy: (Math.random() - 0.5) * 0.15,
+        });
+      }
+    }
+    
+    function getNearestPoints(point, maxDist = 150) {
+      const nearest = [];
+      points.forEach(p => {
+        if(p === point) return;
+        const dx = p.x - point.x;
+        const dy = p.y - point.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < maxDist) nearest.push({point: p, dist});
+      });
+      nearest.sort((a,b) => a.dist - b.dist);
+      return nearest.slice(0, 3);
+    }
+    
+    function animate(t = 0) {
+      ctx.clearRect(0, 0, width, height);
+      
+      // Update and draw points
+      points.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        
+        if(mouse.x !== null && mouse.y !== null) {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          const influenceRadius = 100;
+          
+          if(dist < influenceRadius && dist > 0) {
+            const force = (influenceRadius - dist) / influenceRadius;
+            const angle = Math.atan2(dy, dx);
+            const forceAmount = 1.2;
+            
+            p.vx += Math.cos(angle) * force * forceAmount;
+            p.vy += Math.sin(angle) * force * forceAmount;
+          }
+        }
+        
+        p.vx = Math.max(-maxSpeed, Math.min(maxSpeed, p.vx));
+        p.vy = Math.max(-maxSpeed, Math.min(maxSpeed, p.vy));
+        
+        if(p.x < 0) { p.x = 0; p.vx *= -1; }
+        if(p.x > width) { p.x = width; p.vx *= -1; }
+        if(p.y < 0) { p.y = 0; p.vy *= -1; }
+        if(p.y > height) { p.y = height; p.vy *= -1; }
+      });
+      
+      // Draw connections
+      points.forEach(p => {
+        const nearest = getNearestPoints(p);
+        nearest.forEach(n => {
+          const alpha = 0.3 + 0.7 * Math.sin(t / 1000 + n.dist);
+          ctx.strokeStyle = `rgba(100, 200, 255, ${alpha.toFixed(2)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(n.point.x, n.point.y);
+          ctx.stroke();
+        });
+      });
+      
+      // Draw points
+      points.forEach(p => {
+        const radius = 2 + 1 * Math.sin(t / 500 + p.x + p.y);
+        ctx.fillStyle = 'rgba(150, 220, 255, 0.6)';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      
+      animationId = requestAnimationFrame(animate);
+    }
+    
+    // Event Listeners
+    window.addEventListener('mousemove', e => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    
+    window.addEventListener('mouseout', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+    
+    window.addEventListener('resize', () => {
+      resize();
+      initPoints();
+    });
+    
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationId);
+      } else {
+        animate();
+      }
+    });
+    
+    // Enhanced Button click animation
+    document.querySelectorAll('.btn-group-custom a').forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetUrl = this.href;
+        
+        // Create ripple effect
+        const ripple = document.createElement('span');
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.backgroundColor = 'rgba(255,255,255,0.4)';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.animation = 'ripple 0.6s linear';
+        ripple.style.pointerEvents = 'none';
+        
+        // Position ripple
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = size + 'px';
+        ripple.style.height = size + 'px';
+        ripple.style.left = e.clientX - rect.left - size/2 + 'px';
+        ripple.style.top = e.clientY - rect.top - size/2 + 'px';
+        
+        this.appendChild(ripple);
+        
+        // Trigger divider animation
+        document.querySelector('.welcome-section').classList.add('divider-animate');
+        
+        // Navigate after animation
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 600);
+      });
+    });
+    
+    // Initialize
+    resize();
+    initPoints();
+    animate();
+  </script>
+  <script src="animasi.js"></script>
+</body>
+</html>
