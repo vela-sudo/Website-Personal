@@ -8,18 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Zeyada&display=swap" rel="stylesheet">
   <style>
     body {
-      padding-top: 56px; /* Untuk navbar fixed */
+      padding-top: 56px;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f8f9fa;
       color: #333;
       transition: background-color 0.5s, color 0.5s;
       min-height: 100vh;
     }
-    
-    body.dark-mode {
-      background-color: #121212;
-      color: #ddd;
-    }
+    body.dark-mode { background-color: #121212; color: #ddd; }
 
     h1 {
       font-family: 'Zeyada', cursive;
@@ -30,10 +26,7 @@
       padding-top: 30px;
       transition: color 0.5s;
     }
-    
-    body.dark-mode h1 {
-      color: #ddd;
-    }
+    body.dark-mode h1 { color: #ddd; }
 
     /* Simulasi WhatsApp */
     .whatsapp-simulator {
@@ -51,12 +44,9 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      font-family: sans-serif;
       transition: background 0.5s;
     }
-    body.dark-mode .phone-frame {
-      background: #2d2d2d;
-    }
+    body.dark-mode .phone-frame { background: #2d2d2d; }
     .phone-header {
       background: #212529;
       color: white;
@@ -70,9 +60,7 @@
       border-radius: 50%;
       margin-right: 10px;
     }
-    .contact-info small {
-      color: #b2d8d8;
-    }
+    .contact-info small { color: #b2d8d8; }
     .chat-area {
       flex: 1;
       padding: 10px;
@@ -89,31 +77,17 @@
       line-height: 1.4;
       transition: background-color 0.5s;
     }
-    .received {
-      background: white;
-      align-self: flex-start;
-    }
-    body.dark-mode .received {
-      background: #333;
-      color: #eee;
-    }
-    .sent {
-      background: #dcf8c6;
-      align-self: flex-end;
-    }
-    body.dark-mode .sent {
-      background: #075e54;
-      color: white;
-    }
+    .received { background: white; align-self: flex-start; }
+    body.dark-mode .received { background: #333; color: #eee; }
+    .sent { background: #dcf8c6; align-self: flex-end; }
+    body.dark-mode .sent { background: #075e54; color: white; }
     .chat-input {
       display: flex;
       padding: 8px;
       background: #f0f0f0;
       transition: background 0.5s;
     }
-    body.dark-mode .chat-input {
-      background: #252525;
-    }
+    body.dark-mode .chat-input { background: #252525; }
     .chat-input input {
       flex: 1;
       padding: 8px;
@@ -122,11 +96,7 @@
       outline: none;
       transition: background 0.5s, border-color 0.5s;
     }
-    body.dark-mode .chat-input input {
-      background: #333;
-      border-color: #555;
-      color: #eee;
-    }
+    body.dark-mode .chat-input input { background: #333; border-color: #555; color: #eee; }
     .chat-input button {
       background: #212529;
       color: white;
@@ -138,9 +108,7 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    .chat-input button:hover {
-      background: #343a40;
-    }
+    .chat-input button:hover { background: #343a40; }
 
     /* Ikon kontak */
     .contact-icons {
@@ -150,7 +118,6 @@
       margin: 60px auto;
       max-width: 800px;
     }
-    
     .icon-circle {
       width: 80px;
       height: 80px;
@@ -163,6 +130,7 @@
       transition: all 0.5s ease;
       position: relative;
       overflow: hidden;
+      animation: float 4s ease-in-out infinite;
     }
     body.dark-mode .icon-circle {
       background: #333;
@@ -175,199 +143,19 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: linear-gradient(
-        to bottom right,
-        rgba(255,255,255,0.3) 0%,
-        rgba(255,255,255,0) 60%
-      );
+      background: linear-gradient(to bottom right, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%);
       transform: rotate(30deg);
       transition: all 0.7s ease;
     }
     body.dark-mode .icon-circle::before {
-      background: linear-gradient(
-        to bottom right,
-        rgba(0,0,0,0.3) 0%,
-        rgba(0,0,0,0) 60%
-      );
+      background: linear-gradient(to bottom right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 60%);
     }
-    .icon-circle:hover::before {
-      left: 100%;
-      top: 100%;
-    }
-    .icon-circle img {
-      width: 40px;
-      height: 40px;
-      transition: transform 0.3s ease;
-    }
-    .icon-circle:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-    }
-    body.dark-mode .icon-circle:hover {
-      box-shadow: 0 15px 30px rgba(255,255,255,0.2);
-    }
-    .icon-circle:hover img {
-      transform: scale(1.1);
-    }
+    .icon-circle:hover::before { left: 100%; top: 100%; }
+    .icon-circle img { width: 40px; height: 40px; transition: transform 0.3s ease; }
+    .icon-circle:hover { transform: translateY(-10px); }
+    .icon-circle:hover img { transform: scale(1.1); }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-    /* Animasi melayang */
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-    .icon-circle {
-      animation: float 4s ease-in-out infinite;
-    }
-    .icon-circle:nth-child(2) {
-      animation-delay: 0.5s;
-    }
-    .icon-circle:nth-child(3) {
-      animation-delay: 1s;
-    }
-
-    /* Flip kartu container */
-    .card-container {
-      position: relative;
-      width: 300px;
-      height: 190px;
-      perspective: 1000px;
-      transition: width 0.6s ease;
-      cursor: default;
-      margin: 40px auto;
-      max-width: 800px;
-    }
-    .card-container.expanded { width: 960px; }
-
-    .card {
-      position: absolute;
-      width: 280px;
-      height: 180px;
-      border-radius: 15px;
-      perspective: 1000px;
-      transition:
-        transform 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55),
-        left 0.6s ease;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      top: 5px;
-      cursor: pointer;
-      user-select: none;
-    }
-    body.dark-mode .card {
-      box-shadow: 0 10px 25px rgba(255,255,255,0.15);
-    }
-    .card.instagram { left: 10px; z-index: 3; }
-    .card.whatsapp { left: 15px; z-index: 2; }
-    .card.email { left: 20px; z-index: 1; }
-
-    .card-container.expanded .card.instagram { left: 0; z-index: 3; }
-    .card-container.expanded .card.whatsapp { left: 340px; z-index: 2; }
-    .card-container.expanded .card.email { left: 680px; z-index: 1; }
-
-    .card-inner {
-      width: 100%;
-      height: 100%;
-      border-radius: 15px;
-      transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      transform-style: preserve-3d;
-      position: relative;
-    }
-    .card.open .card-inner { transform: rotateY(180deg); }
-
-    .card-front, .card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 15px;
-      backface-visibility: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-weight: 600;
-      font-size: 20px;
-      text-align: center;
-      padding: 20px;
-      box-sizing: border-box;
-      top: 0;
-      left: 0;
-      user-select: none;
-    }
-
-    .card-front {
-      background: repeating-linear-gradient(
-        45deg,
-        #f8f8f8,
-        #f8f8f8 10px,
-        #e0e0e0 10px,
-        #e0e0e0 20px
-      );
-      color: #333;
-      font-style: italic;
-      font-size: 18px;
-      border: 1px solid #ddd;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
-      transition: background 0.5s, border-color 0.5s;
-    }
-    body.dark-mode .card-front {
-      background: repeating-linear-gradient(
-        45deg,
-        #2d2d2d,
-        #2d2d2d 10px,
-        #333 10px,
-        #333 20px
-      );
-      color: #eee;
-      border-color: #555;
-    }
-    .card-front::before, .card-front::after {
-      content: "♠";
-      position: absolute;
-      font-size: 24px;
-      color: #333;
-      transition: color 0.5s;
-    }
-    body.dark-mode .card-front::before,
-    body.dark-mode .card-front::after {
-      color: #eee;
-    }
-    .card-front::before { top: 10px; left: 10px; }
-    .card-front::after { bottom: 10px; right: 10px; transform: rotate(180deg); }
-
-    .card-back { background: #333; color: #eee; font-size: 18px; line-height: 1.5; transform: rotateY(180deg); }
-    .card-back.instagram { background: #E1306C; }
-    .card-back.whatsapp { background: #25D366; }
-    .card-back.email { background: #D44638; }
-
-    @media (max-width: 1000px) {
-      .card-container.expanded { width: 100%; }
-      .card-container.expanded .card.instagram { left: 5px; }
-      .card-container.expanded .card.whatsapp { left: calc(50% - 140px); }
-      .card-container.expanded .card.email { left: calc(100% - 285px); }
-    }
-
-    .btn-select {
-      display: block;
-      margin: 0 auto 40px;
-      background: #212529;
-      border: none;
-      color: white;
-      padding: 14px 28px;
-      font-size: 20px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .btn-select:hover {
-      background: #343a40;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
-    .btn-select:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
     /* Toggle Mode */
     .toggle-switch {
       position: relative;
@@ -376,23 +164,14 @@
       background: #eee;
       border-radius: 30px;
       cursor: pointer;
-      user-select: none;
-      box-sizing: border-box;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0.8px;
       transition: background-color 0.3s;
     }
-    body.dark-mode .toggle-switch {
-      background: #444;
-    }
-    .toggle-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-      position: absolute;
-    }
+    body.dark-mode .toggle-switch { background: #444; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
     .slider {
       position: absolute;
       top: 3px;
@@ -405,37 +184,93 @@
       transition: transform 0.3s ease;
       z-index: 2;
     }
-    input:checked + .slider {
-      transform: translateX(36px);
+    input:checked + .slider { transform: translateX(36px); }
+    .icons { width: 100%; display: flex; justify-content: space-between; padding: 0 5px; z-index: 1; }
+    .icon.sun { color: #f39c12; }
+    .icon.moon { color: #999; }
+    body.dark-mode .nav-link { color: #ddd !important; }
+    body.dark-mode .nav-link.active { color: #0a459c !important; font-weight: 600; }
+
+    /* Flower Scene */
+    .flower-scene {
+      position: relative;
+      height: 350px;
+      margin: 60px auto 20px;
+      max-width: 920px;
+      overflow: hidden;
+      border-radius: 16px;
+      background: transparent;
     }
-    .icons {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 18px;
-      pointer-events: none;
-      user-select: none;
-      padding: 0 5px;
-      z-index: 1;
+    .flower-scene .wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; }
+    .flower-scene .sun {
+      position: absolute; top: 30px; right: 50px;
+      width: 80px; height: 80px;
+      background: radial-gradient(circle, #FFD700, #FFA500);
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(255,215,0,0.7);
     }
-    .icon.sun {
-      color: #f39c12;
-      transition: color 0.3s;
+    .flower-scene .cloud {
+      position: absolute; top: 40px; left: 50px;
+      width: 120px; height: 60px; background: #fff;
+      border-radius: 50px;
+      box-shadow: 30px 10px 0 #fff, 60px 0 0 #fff;
     }
-    .icon.moon {
-      color: #999;
-      transition: color 0.3s;
+    .flower-scene .pot {
+      position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 65px; background: #8B4513;
+      border-radius: 0 0 20px 20px;
     }
-    
-    /* Navbar dark mode */
-    body.dark-mode .nav-link {
-      color: #ddd !important;
+    .flower-scene .stem {
+      position: absolute; bottom: 60px; left: 50%;
+      width: 8px; height: 0; background: green;
+      transform: translateX(-50%);
+      transition: height 2s ease;
     }
-    body.dark-mode .nav-link.active {
-      color: #0a459c !important;
-      font-weight: 600;
+    .flower-scene .bud {
+      position: absolute; bottom: 140px; left: 50%;
+      width: 26px; height: 26px; background: green;
+      border-radius: 50%;
+      transform: translateX(-50%) scale(0);
+      transition: transform 1.5s ease;
+      z-index: 2;
     }
+    .flower-scene .flower {
+      position: absolute; bottom: 182px; left: 50%;
+      transform: translateX(-50%) scale(0);
+      transition: transform 2s ease;
+      width: 20px; height: 20px;
+    }
+    .flower-scene .petal {
+      width: 22px; height: 22px; background: pink; border-radius: 50%;
+      position: absolute;
+    }
+    .flower-scene .petal:nth-child(1){ top:-22px; left:0; }
+    .flower-scene .petal:nth-child(2){ top:0; left:22px; }
+    .flower-scene .petal:nth-child(3){ top:22px; left:0; }
+    .flower-scene .petal:nth-child(4){ top:0; left:-22px; }
+    .flower-scene .center {
+      width: 20px; height: 20px; background: yellow; border-radius: 50%;
+      position: absolute; top:0; left:0;
+    }
+    .flower-scene .can {
+      position: absolute; top: 110px; left: 80px;
+      width: 64px; height: 42px; background: gray;
+      border-radius: 10px; cursor: grab; z-index: 10;
+      touch-action: none;
+    }
+    .flower-scene .can::before {
+      content: ''; position: absolute; right: -16px; top: 12px;
+      width: 22px; height: 9px; background: gray; border-radius: 5px;
+    }
+    .flower-scene .water {
+      position: absolute; top: 38px; left: 50%;
+      width: 6px; height: 12px; background: blue;
+      border-radius: 50%;
+      opacity: 0;
+      transform: translateX(-50%);
+      animation: drop 0.5s infinite;
+    }
+    @keyframes drop { 0%{opacity:1; transform:translate(-50%,0);} 100%{opacity:0; transform:translate(-50%,18px);} }
   </style>
 </head>
 <body>
@@ -444,27 +279,20 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
     <a class="navbar-brand" href="index.html" style="font-family: 'Zeyada', cursive; font-size: 30px;">portofolio</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto align-items-center">
         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="profile.html">Profil</a></li>
         <li class="nav-item"><a class="nav-link" href="project.html">Projek</a></li>
-        <li class="nav-item"><a class="nav-link active" href="kontak.html" aria-current="page">Kontak</a></li>
-        
-        <!-- Toggle Mode sebagai item navbar -->
+        <li class="nav-item"><a class="nav-link active" href="kontak.html">Kontak</a></li>
         <li class="nav-item d-flex align-items-center ms-3">
-          <label class="toggle-switch mb-0" aria-label="Toggle dark mode">
+          <label class="toggle-switch mb-0">
             <input type="checkbox" id="modeToggle" />
             <span class="slider"></span>
-            <div class="icons">
-              <span class="icon sun" aria-hidden="true">🌞</span>
-              <span class="icon moon" aria-hidden="true">🌙</span>
-            </div>
+            <div class="icons"><span class="icon sun">🌞</span><span class="icon moon">🌙</span></div>
           </label>
         </li>
       </ul>
@@ -472,7 +300,6 @@
   </div>
 </nav>
 
-<!-- Konten Utama -->
 <main class="container">
   <h1>Kontak Saya</h1>
 
@@ -480,142 +307,127 @@
   <div class="whatsapp-simulator">
     <div class="phone-frame">
       <div class="phone-header">
-        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="profile-pic" alt="Profile">
+        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="profile-pic">
         <div class="contact-info">
-          <strong>Vela</strong><br>
-          <small>online</small>
+          <strong>Vela</strong><br><small>online</small>
         </div>
       </div>
       <div class="chat-area" id="chatArea">
         <div class="message received">Hai! Ada yang bisa aku bantu? 😊</div>
       </div>
       <div class="chat-input">
-        <input type="text" id="waMessage" placeholder="Ketik pesan..." />
+        <input type="text" id="waMessage" placeholder="Ketik pesan...">
         <button id="sendBtn">➤</button>
       </div>
     </div>
   </div>
 
   <!-- Icon kontak -->
-  <div class="contact-icons" aria-label="Ikon kontak sosial media dan email">
-    <a href="https://instagram.com/vela_riyani" target="_blank" class="icon-circle instagram" aria-label="Instagram">
-      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-    </a>
-    <a href="https://wa.me/6283866507949" target="_blank" class="icon-circle whatsapp" aria-label="WhatsApp">
-      <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp">
-    </a>
-    <a href="mailto:velarynia@gmail.com" class="icon-circle email" aria-label="Email">
-      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email">
-    </a>
+  <div class="contact-icons">
+    <a href="https://instagram.com/vela_r.a" target="_blank" class="icon-circle"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
+    <a href="https://wa.me/6283866507949" target="_blank" class="icon-circle"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png"></a>
+    <a href="mailto:velarynia@gmail.com" class="icon-circle"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"></a>
   </div>
 
-  <!-- Flip kartu -->
-  <div class="card-container" aria-label="Kartu kontak tumpuk dan flip interaktif">
-    <div class="card instagram" tabindex="0" role="button" aria-pressed="false">
-      <div class="card-inner">
-        <div class="card-front">?</div>
-        <div class="card-back instagram">
-          "Terus berkarya, jangan mudah menyerah!<br>Follow aku di Instagram @vela_riyani"
-        </div>
+  <!-- Flower Animation -->
+  <section class="flower-scene">
+    <svg class="wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#87ceeb" fill-opacity="1" d="M0,256L40,245.3C80,235,160,213,240,213.3C320,213,400,235,480,224C560,213,640,171,720,154.7C800,139,880,149,960,154.7C1040,160,1120,160,1200,154.7C1280,149,1360,139,1400,133.3L1440,128L1440,320L0,320Z"></path>
+    </svg>
+    <div class="sun"></div>
+    <div class="cloud"></div>
+    <div class="pot">
+      <div class="stem"></div>
+      <div class="bud"></div>
+      <div class="flower">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="center"></div>
       </div>
     </div>
-    <div class="card whatsapp" tabindex="0" role="button" aria-pressed="false">
-      <div class="card-inner">
-        <div class="card-front">?</div>
-        <div class="card-back whatsapp">
-          "Setiap hari adalah kesempatan baru.<br>Hubungi aku via WhatsApp di 083866507949"
-        </div>
-      </div>
+    <div class="can">
+      <div class="water"></div>
     </div>
-    <div class="card email" tabindex="0" role="button" aria-pressed="false">
-      <div class="card-inner">
-        <div class="card-front">?</div>
-        <div class="card-back email">
-          "Semangat dan sukses selalu!<br>Email aku di velarynia@gmail.com"
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <button class="btn-select" aria-label="Tombol pisahkan kartu">Pisahkan Kartu</button>
+  </section>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   // Simulasi WhatsApp
-  document.getElementById('sendBtn').addEventListener('click', sendMessage);
-  document.getElementById('waMessage').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') sendMessage();
-  });
+  const chatArea = document.getElementById('chatArea');
+
+  function scrollChat() {
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }
 
   function sendMessage() {
     const input = document.getElementById('waMessage');
     const message = input.value.trim();
-    if (message === '') return;
-
-    const chatArea = document.getElementById('chatArea');
+    if (!message) return;
 
     const userMsg = document.createElement('div');
     userMsg.className = 'message sent';
     userMsg.textContent = message;
     chatArea.appendChild(userMsg);
-
     input.value = '';
-    chatArea.scrollTop = chatArea.scrollHeight;
+    scrollChat();
+
+    // Simpan otomatis
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+    chatHistory.push({ type: 'sent', text: message });
+    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
 
     setTimeout(() => {
       const botMsg = document.createElement('div');
       botMsg.className = 'message received';
       botMsg.textContent = 'Pesan kamu sudah kami terima ✅';
       chatArea.appendChild(botMsg);
-      chatArea.scrollTop = chatArea.scrollHeight;
+      chatHistory.push({ type: 'received', text: botMsg.textContent });
+      localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+      scrollChat();
     }, 1000);
   }
 
-  // Flip card
-  const container = document.querySelector('.card-container');
-  const cards = container.querySelectorAll('.card');
-  const btnSelect = document.querySelector('.btn-select');
-  let isExpanded = false;
+  document.getElementById('sendBtn').addEventListener('click', sendMessage);
+  document.getElementById('waMessage').addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
 
-  btnSelect.addEventListener('click', () => {
-    if (!isExpanded) {
-      container.classList.add('expanded');
-      isExpanded = true;
-      btnSelect.style.display = 'none';
-      cards[0].focus();
-    }
+  // Load chat history saat reload
+  let chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+  chatHistory.forEach(msg => {
+    const div = document.createElement('div');
+    div.className = 'message ' + msg.type;
+    div.textContent = msg.text;
+    chatArea.appendChild(div);
   });
+  scrollChat();
 
-  cards.forEach(card => {
-    card.addEventListener('click', () => {
-      if (!isExpanded) return;
-      card.classList.toggle('open');
-      card.setAttribute('aria-pressed', card.classList.contains('open') ? 'true' : 'false');
-    });
-    card.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        card.click();
-      }
-    });
-  });
-
-  // Toggle mode malam/siang
+  // Toggle dark mode
   const toggle = document.getElementById('modeToggle');
-  if (localStorage.getItem('mode') === 'dark') {
-    document.body.classList.add('dark-mode');
-    toggle.checked = true;
+  toggle.addEventListener('change', () => { document.body.classList.toggle('dark-mode'); });
+
+  // Flower grow only on watering
+  const stem = document.querySelector('.stem');
+  const bud = document.querySelector('.bud');
+  const flower = document.querySelector('.flower');
+  const can = document.querySelector('.can');
+  const water = document.querySelector('.water');
+
+  function growFlower() {
+    stem.style.height = '80px';
+    bud.style.transform = 'translateX(-50%) scale(1)';
+    setTimeout(() => { flower.style.transform = 'translateX(-50%) scale(1)'; }, 1500);
   }
-  toggle.addEventListener('change', () => {
-    if (toggle.checked) {
-      document.body.classList.add('dark-mode');
-      localStorage.setItem('mode', 'dark');
-    } else {
-      document.body.classList.remove('dark-mode');
-      localStorage.setItem('mode', 'light');
-    }
+
+  can.addEventListener('click', () => {
+    // Water animation
+    water.style.opacity = 1;
+    setTimeout(() => { water.style.opacity = 0; }, 500);
+    // Grow flower
+    growFlower();
   });
 </script>
+
 </body>
 </html>
