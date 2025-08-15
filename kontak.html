@@ -7,270 +7,451 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Zeyada&display=swap" rel="stylesheet">
   <style>
-    body {
-      padding-top: 56px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
-      transition: background-color 0.5s, color 0.5s;
-      min-height: 100vh;
+    /* --- STYLING --- */
+    body { 
+      padding-top: 56px; 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      background-color: #f8f9fa; 
+      color: #333; 
+      transition: background-color 0.5s, color 0.5s; 
+      min-height: 100vh; 
     }
-    body.dark-mode { background-color: #121212; color: #ddd; }
+    body.dark-mode { 
+      background-color: #121212; 
+      color: #ddd; 
+    }
+    h1 { 
+      font-family: 'Zeyada', cursive; 
+      font-size: 3rem; 
+      margin-bottom: 25px; 
+      color: #2c3e50; 
+      text-align: center; 
+      padding-top: 30px; 
+      transition: color 0.5s; 
+    }
+    body.dark-mode h1 { 
+      color: #ddd; 
+    }
 
-    h1 {
-      font-family: 'Zeyada', cursive;
-      font-size: 3rem;
-      margin-bottom: 25px;
-      color: #2c3e50;
-      text-align: center;
-      padding-top: 30px;
-      transition: color 0.5s;
+    /* WhatsApp Simulator */
+    .whatsapp-simulator { 
+      display: flex; 
+      justify-content: center; 
+      margin: 40px auto; 
+      max-width: 800px; 
     }
-    body.dark-mode h1 { color: #ddd; }
-
-    /* Simulasi WhatsApp */
-    .whatsapp-simulator {
-      display: flex;
-      justify-content: center;
-      margin: 40px auto;
-      max-width: 800px;
+    .phone-frame { 
+      width: 320px; 
+      height: 500px; 
+      background: #e5ddd5; 
+      border-radius: 25px; 
+      box-shadow: 0 8px 18px rgba(0,0,0,0.2); 
+      display: flex; 
+      flex-direction: column; 
+      overflow: hidden; 
+      transition: background 0.5s; 
     }
-    .phone-frame {
-      width: 320px;
-      height: 500px;
-      background: #e5ddd5;
-      border-radius: 25px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.2);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      transition: background 0.5s;
+    body.dark-mode .phone-frame { 
+      background: #2d2d2d; 
     }
-    body.dark-mode .phone-frame { background: #2d2d2d; }
-    .phone-header {
-      background: #212529;
-      color: white;
-      padding: 10px;
-      display: flex;
-      align-items: center;
+    .phone-header { 
+      background: #075e54; 
+      color: white; 
+      padding: 10px; 
+      display: flex; 
+      align-items: center; 
     }
-    .phone-header .profile-pic {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      margin-right: 10px;
+    .phone-header .profile-pic { 
+      width: 35px; 
+      height: 35px; 
+      border-radius: 50%; 
+      margin-right: 10px; 
     }
-    .contact-info small { color: #b2d8d8; }
-    .chat-area {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
+    .contact-info small { 
+      color: #b2d8d8; 
     }
-    .message {
-      max-width: 75%;
-      padding: 8px 12px;
-      border-radius: 7px;
-      margin-bottom: 10px;
-      font-size: 14px;
-      line-height: 1.4;
-      transition: background-color 0.5s;
+    .chat-area { 
+      flex: 1; 
+      padding: 10px; 
+      overflow-y: auto; 
+      display: flex; 
+      flex-direction: column; 
+      background-image: url('https://web.whatsapp.com/img/bg-chat-tile-light_a4be512e7195b6b733d9110b408f075d.png');
+      background-repeat: repeat;
     }
-    .received { background: white; align-self: flex-start; }
-    body.dark-mode .received { background: #333; color: #eee; }
-    .sent { background: #dcf8c6; align-self: flex-end; }
-    body.dark-mode .sent { background: #075e54; color: white; }
-    .chat-input {
-      display: flex;
-      padding: 8px;
-      background: #f0f0f0;
-      transition: background 0.5s;
+    body.dark-mode .chat-area {
+      background-image: url('https://web.whatsapp.com/img/bg-chat-tile-dark_04dcac47e7b6e4f0e13b8cf6d6a7740f.png');
     }
-    body.dark-mode .chat-input { background: #252525; }
-    .chat-input input {
-      flex: 1;
-      padding: 8px;
-      border-radius: 20px;
-      border: 1px solid #ccc;
-      outline: none;
-      transition: background 0.5s, border-color 0.5s;
-    }
-    body.dark-mode .chat-input input { background: #333; border-color: #555; color: #eee; }
-    .chat-input button {
-      background: #212529;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 35px;
-      height: 35px;
-      margin-left: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .chat-input button:hover { background: #343a40; }
-
-    /* Ikon kontak */
-    .contact-icons {
-      display: flex;
-      justify-content: center;
-      gap: 50px;
-      margin: 60px auto;
-      max-width: 800px;
-    }
-    .icon-circle {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: white;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      transition: all 0.5s ease;
+    .message { 
+      max-width: 75%; 
+      padding: 8px 12px; 
+      border-radius: 7px; 
+      margin-bottom: 10px; 
+      font-size: 14px; 
+      line-height: 1.4; 
+      transition: background-color 0.5s; 
       position: relative;
-      overflow: hidden;
-      animation: float 4s ease-in-out infinite;
     }
-    body.dark-mode .icon-circle {
-      background: #333;
-      box-shadow: 0 10px 25px rgba(255,255,255,0.1);
+    .received { 
+      background: white; 
+      align-self: flex-start; 
+      border-top-left-radius: 0;
     }
-    .icon-circle::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(to bottom right, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%);
-      transform: rotate(30deg);
-      transition: all 0.7s ease;
+    body.dark-mode .received { 
+      background: #333; 
+      color: #eee; 
     }
-    body.dark-mode .icon-circle::before {
-      background: linear-gradient(to bottom right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 60%);
+    .sent { 
+      background: #dcf8c6; 
+      align-self: flex-end; 
+      border-top-right-radius: 0;
     }
-    .icon-circle:hover::before { left: 100%; top: 100%; }
-    .icon-circle img { width: 40px; height: 40px; transition: transform 0.3s ease; }
-    .icon-circle:hover { transform: translateY(-10px); }
-    .icon-circle:hover img { transform: scale(1.1); }
-    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    body.dark-mode .sent { 
+      background: #075e54; 
+      color: white; 
+    }
+    .message-time {
+      font-size: 10px;
+      color: #666;
+      text-align: right;
+      margin-top: 2px;
+    }
+    body.dark-mode .message-time {
+      color: #aaa;
+    }
+    .chat-input { 
+      display: flex; 
+      padding: 8px; 
+      background: #f0f0f0; 
+      transition: background 0.5s; 
+    }
+    body.dark-mode .chat-input { 
+      background: #252525; 
+    }
+    .chat-input input { 
+      flex: 1; 
+      padding: 8px 12px; 
+      border-radius: 20px; 
+      border: 1px solid #ccc; 
+      outline: none; 
+      transition: background 0.5s, border-color 0.5s; 
+    }
+    body.dark-mode .chat-input input { 
+      background: #333; 
+      border-color: #555; 
+      color: #eee; 
+    }
+    .chat-input button { 
+      background: #075e54; 
+      color: white; 
+      border: none; 
+      border-radius: 50%; 
+      width: 35px; 
+      height: 35px; 
+      margin-left: 5px; 
+      cursor: pointer; 
+      transition: background 0.3s; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chat-input button:hover { 
+      background: #128c7e; 
+    }
+
+    /* Contact Icons */
+    .contact-icons { 
+      display: flex; 
+      justify-content: center; 
+      gap: 50px; 
+      margin: 60px auto; 
+      max-width: 800px; 
+      flex-wrap: wrap;
+    }
+    .icon-circle { 
+      width: 80px; 
+      height: 80px; 
+      border-radius: 50%; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      background: white; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+      transition: all 0.5s ease; 
+      position: relative; 
+      overflow: hidden; 
+      animation: float 4s ease-in-out infinite; 
+    }
+    body.dark-mode .icon-circle { 
+      background: #333; 
+      box-shadow: 0 10px 25px rgba(255,255,255,0.1); 
+    }
+    .icon-circle::before { 
+      content: ''; 
+      position: absolute; 
+      top: -50%; 
+      left: -50%; 
+      width: 200%; 
+      height: 200%; 
+      background: linear-gradient(to bottom right, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%); 
+      transform: rotate(30deg); 
+      transition: all 0.7s ease; 
+    }
+    body.dark-mode .icon-circle::before { 
+      background: linear-gradient(to bottom right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 60%); 
+    }
+    .icon-circle:hover::before { 
+      left: 100%; 
+      top: 100%; 
+    }
+    .icon-circle img { 
+      width: 40px; 
+      height: 40px; 
+      transition: transform 0.3s ease; 
+    }
+    .icon-circle:hover { 
+      transform: translateY(-10px); 
+    }
+    .icon-circle:hover img { 
+      transform: scale(1.1); 
+    }
+    @keyframes float { 
+      0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);} 
+    }
 
     /* Toggle Mode */
-    .toggle-switch {
-      position: relative;
-      width: 70px;
-      height: 30px;
-      background: #eee;
-      border-radius: 30px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.8px;
-      transition: background-color 0.3s;
+    .toggle-switch { 
+      position: relative; 
+      width: 70px; 
+      height: 30px; 
+      background: #eee; 
+      border-radius: 30px; 
+      cursor: pointer; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      padding: 0.8px; 
+      transition: background-color 0.3s; 
     }
-    body.dark-mode .toggle-switch { background: #444; }
-    .toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
-    .slider {
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 24px;
-      height: 24px;
-      background: white;
-      border-radius: 50%;
-      box-shadow: 0 0 5px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
-      z-index: 2;
+    body.dark-mode .toggle-switch { 
+      background: #444; 
     }
-    input:checked + .slider { transform: translateX(36px); }
-    .icons { width: 100%; display: flex; justify-content: space-between; padding: 0 5px; z-index: 1; }
-    .icon.sun { color: #f39c12; }
-    .icon.moon { color: #999; }
-    body.dark-mode .nav-link { color: #ddd !important; }
-    body.dark-mode .nav-link.active { color: #0a459c !important; font-weight: 600; }
+    .toggle-switch input { 
+      opacity: 0; 
+      width: 0; 
+      height: 0; 
+      position: absolute; 
+    }
+    .slider { 
+      position: absolute; 
+      top: 3px; 
+      left: 3px; 
+      width: 24px; 
+      height: 24px; 
+      background: white; 
+      border-radius: 50%; 
+      box-shadow: 0 0 5px rgba(0,0,0,0.2); 
+      transition: transform 0.3s ease; 
+      z-index: 2; 
+    }
+    input:checked + .slider { 
+      transform: translateX(36px); 
+    }
+    .icons { 
+      width: 100%; 
+      display: flex; 
+      justify-content: space-between; 
+      padding: 0 5px; 
+      z-index: 1; 
+    }
+    .icon.sun { 
+      color: #f39c12; 
+    }
+    .icon.moon { 
+      color: #999; 
+    }
+    body.dark-mode .nav-link { 
+      color: #ddd !important; 
+    }
+    body.dark-mode .nav-link.active { 
+      color: #4fc3f7 !important; 
+      font-weight: 600; 
+    }
 
     /* Flower Scene */
-    .flower-scene {
-      position: relative;
-      height: 350px;
-      margin: 60px auto 20px;
-      max-width: 920px;
-      overflow: hidden;
-      border-radius: 16px;
-      background: transparent;
+    .flower-scene { 
+      position: relative; 
+      height: 350px; 
+      margin: 60px auto 20px; 
+      max-width: 920px; 
+      overflow: hidden; 
+      border-radius: 16px; 
+      background: transparent; 
     }
-    .flower-scene .wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; }
-    .flower-scene .sun {
-      position: absolute; top: 30px; right: 50px;
-      width: 80px; height: 80px;
-      background: radial-gradient(circle, #FFD700, #FFA500);
-      border-radius: 50%;
-      box-shadow: 0 0 30px rgba(255,215,0,0.7);
+    .flower-scene .wave { 
+      position: absolute; 
+      bottom: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
     }
-    .flower-scene .cloud {
-      position: absolute; top: 40px; left: 50px;
-      width: 120px; height: 60px; background: #fff;
-      border-radius: 50px;
-      box-shadow: 30px 10px 0 #fff, 60px 0 0 #fff;
+    .flower-scene .sun { 
+      position: absolute; 
+      top: 30px; 
+      right: 50px; 
+      width: 80px; 
+      height: 80px; 
+      background: radial-gradient(circle, #FFD700, #FFA500); 
+      border-radius: 50%; 
+      box-shadow: 0 0 30px rgba(255,215,0,0.7); 
     }
-    .flower-scene .pot {
-      position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
-      width: 110px; height: 65px; background: #8B4513;
-      border-radius: 0 0 20px 20px;
+    .flower-scene .cloud { 
+      position: absolute; 
+      top: 40px; 
+      left: 50px; 
+      width: 120px; 
+      height: 60px; 
+      background: #fff; 
+      border-radius: 50px; 
+      box-shadow: 30px 10px 0 #fff, 60px 0 0 #fff; 
     }
-    .flower-scene .stem {
-      position: absolute; bottom: 60px; left: 50%;
-      width: 8px; height: 0; background: green;
-      transform: translateX(-50%);
-      transition: height 2s ease;
+    body.dark-mode .flower-scene .cloud {
+      background: #e0e0e0;
+      box-shadow: 30px 10px 0 #e0e0e0, 60px 0 0 #e0e0e0;
     }
-    .flower-scene .bud {
-      position: absolute; bottom: 140px; left: 50%;
-      width: 26px; height: 26px; background: green;
-      border-radius: 50%;
-      transform: translateX(-50%) scale(0);
-      transition: transform 1.5s ease;
-      z-index: 2;
+    .flower-scene .pot { 
+      position: absolute; 
+      bottom: 60px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      width: 110px; 
+      height: 65px; 
+      background: #8B4513; 
+      border-radius: 0 0 20px 20px; 
     }
-    .flower-scene .flower {
-      position: absolute; bottom: 182px; left: 50%;
-      transform: translateX(-50%) scale(0);
-      transition: transform 2s ease;
-      width: 20px; height: 20px;
+    .flower-scene .stem { 
+      position: absolute; 
+      bottom: 60px; 
+      left: 50%; 
+      width: 8px; 
+      height: 0; 
+      background: green; 
+      transform: translateX(-50%); 
+      transition: height 2s ease; 
     }
-    .flower-scene .petal {
-      width: 22px; height: 22px; background: pink; border-radius: 50%;
-      position: absolute;
+    .flower-scene .bud { 
+      position: absolute; 
+      bottom: 140px; 
+      left: 50%; 
+      width: 26px; 
+      height: 26px; 
+      background: green; 
+      border-radius: 50%; 
+      transform: translateX(-50%) scale(0); 
+      transition: transform 1.5s ease; 
+      z-index: 2; 
+    }
+    .flower-scene .flower { 
+      position: absolute; 
+      bottom: 182px; 
+      left: 50%; 
+      transform: translateX(-50%) scale(0); 
+      transition: transform 2s ease; 
+      width: 20px; 
+      height: 20px; 
+    }
+    .flower-scene .petal { 
+      width: 22px; 
+      height: 22px; 
+      background: pink; 
+      border-radius: 50%; 
+      position: absolute; 
     }
     .flower-scene .petal:nth-child(1){ top:-22px; left:0; }
     .flower-scene .petal:nth-child(2){ top:0; left:22px; }
     .flower-scene .petal:nth-child(3){ top:22px; left:0; }
     .flower-scene .petal:nth-child(4){ top:0; left:-22px; }
-    .flower-scene .center {
-      width: 20px; height: 20px; background: yellow; border-radius: 50%;
-      position: absolute; top:0; left:0;
+    .flower-scene .center { 
+      width: 20px; 
+      height: 20px; 
+      background: yellow; 
+      border-radius: 50%; 
+      position: absolute; 
+      top:0; 
+      left:0; 
     }
-    .flower-scene .can {
-      position: absolute; top: 110px; left: 80px;
-      width: 64px; height: 42px; background: gray;
-      border-radius: 10px; cursor: grab; z-index: 10;
-      touch-action: none;
+    .flower-scene .can { 
+      position: absolute; 
+      top: 110px; 
+      left: 80px; 
+      width: 64px; 
+      height: 42px; 
+      background: gray; 
+      border-radius: 10px; 
+      cursor: grab; 
+      z-index: 10; 
+      touch-action: none; 
     }
-    .flower-scene .can::before {
-      content: ''; position: absolute; right: -16px; top: 12px;
-      width: 22px; height: 9px; background: gray; border-radius: 5px;
+    .flower-scene .can::before { 
+      content: ''; 
+      position: absolute; 
+      right: -16px; 
+      top: 12px; 
+      width: 22px; 
+      height: 9px; 
+      background: gray; 
+      border-radius: 5px; 
     }
-    .flower-scene .water {
-      position: absolute; top: 38px; left: 50%;
-      width: 6px; height: 12px; background: blue;
-      border-radius: 50%;
-      opacity: 0;
-      transform: translateX(-50%);
-      animation: drop 0.5s infinite;
+    .flower-scene .water { 
+      position: absolute; 
+      top: 38px; 
+      left: 50%; 
+      width: 6px; 
+      height: 12px; 
+      background: blue; 
+      border-radius: 50%; 
+      opacity: 0; 
+      transform: translateX(-50%); 
+      animation: drop 0.5s infinite; 
     }
-    @keyframes drop { 0%{opacity:1; transform:translate(-50%,0);} 100%{opacity:0; transform:translate(-50%,18px);} }
+    @keyframes drop { 
+      0%{opacity:1; transform:translate(-50%,0);} 
+      100%{opacity:0; transform:translate(-50%,18px);} 
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .contact-icons {
+        gap: 30px;
+      }
+      .icon-circle {
+        width: 70px;
+        height: 70px;
+      }
+      .icon-circle img {
+        width: 35px;
+        height: 35px;
+      }
+      .flower-scene {
+        height: 280px;
+      }
+    }
+    @media (max-width: 576px) {
+      .contact-icons {
+        gap: 20px;
+      }
+      .icon-circle {
+        width: 60px;
+        height: 60px;
+      }
+      .icon-circle img {
+        width: 30px;
+        height: 30px;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -278,7 +459,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="index.html" style="font-family: 'Zeyada', cursive; font-size: 30px;">portofolio</a>
+    <a class="navbar-brand" href="index.html" style="font-family: 'Zeyada', cursive; font-size: 30px;">Vela</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -307,26 +488,39 @@
   <div class="whatsapp-simulator">
     <div class="phone-frame">
       <div class="phone-header">
-        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="profile-pic">
+        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="profile-pic" alt="Profile Picture">
         <div class="contact-info">
           <strong>Vela</strong><br><small>online</small>
         </div>
       </div>
       <div class="chat-area" id="chatArea">
-        <div class="message received">Hai! Ada yang bisa aku bantu? 😊</div>
+        <div class="message received">
+          Hai! Ada yang bisa aku bantu? 😊
+          <div class="message-time">10:00</div>
+        </div>
       </div>
       <div class="chat-input">
-        <input type="text" id="waMessage" placeholder="Ketik pesan...">
-        <button id="sendBtn">➤</button>
+        <input type="text" id="waMessage" placeholder="Ketik pesan..." aria-label="Ketik pesan">
+        <button id="sendBtn" aria-label="Kirim pesan">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
 
   <!-- Icon kontak -->
   <div class="contact-icons">
-    <a href="https://instagram.com/vela_r.a" target="_blank" class="icon-circle"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
-    <a href="https://wa.me/6283866507949" target="_blank" class="icon-circle"><img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png"></a>
-    <a href="mailto:velarynia@gmail.com" class="icon-circle"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"></a>
+    <a href="https://instagram.com/vela_r.a" target="_blank" class="icon-circle" aria-label="Instagram">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+    </a>
+    <a href="https://wa.me/6283866507949" target="_blank" class="icon-circle" aria-label="WhatsApp">
+      <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp">
+    </a>
+    <a href="mailto:velarynia@gmail.com" class="icon-circle" aria-label="Email">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email">
+    </a>
   </div>
 
   <!-- Flower Animation -->
@@ -355,59 +549,105 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Simulasi WhatsApp
-  const chatArea = document.getElementById('chatArea');
+  // Dark mode toggle
+  const toggle = document.getElementById('modeToggle');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  // Set initial mode based on preference
+  if (prefersDark) {
+    document.body.classList.add('dark-mode');
+    toggle.checked = true;
+  }
+  
+  toggle.addEventListener('change', () => { 
+    document.body.classList.toggle('dark-mode');
+    // Save preference to localStorage
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+  });
 
-  function scrollChat() {
-    chatArea.scrollTop = chatArea.scrollHeight;
+  // Check for saved preference
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+    toggle.checked = true;
+  }
+
+  // WhatsApp simulator
+  const chatArea = document.getElementById('chatArea');
+  const waMessage = document.getElementById('waMessage');
+  const sendBtn = document.getElementById('sendBtn');
+
+  function scrollChat() { 
+    chatArea.scrollTop = chatArea.scrollHeight; 
+  }
+
+  function getCurrentTime() {
+    const now = new Date();
+    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function createMessage(content, type) {
+    const message = document.createElement('div');
+    message.className = `message ${type}`;
+    message.innerHTML = `${content}<div class="message-time">${getCurrentTime()}</div>`;
+    return message;
+  }
+
+  function sendToGoogleForm(message) {
+    // Ganti dengan URL submit form Anda yang sebenarnya
+    const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSfAvF5zJku9l8spNIXeXkcJPQfF5YE8MpxkXADC_bN_0Os1aw/formResponse";
+    
+    // Ganti dengan nama field yang benar dari form Anda
+    const fieldName = "entry.163215383"; 
+    
+    // Format data untuk dikirim
+    const formData = new URLSearchParams();
+    formData.append(fieldName, message);
+
+    // Kirim data ke Google Form
+    fetch(formURL, {
+      method: "POST",
+      body: formData,
+      mode: "no-cors", // Penting untuk menghindari error CORS
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    }).then(() => {
+      console.log("Pesan berhasil dikirim ke Google Form");
+    }).catch(err => {
+      console.error("Gagal mengirim:", err);
+    });
   }
 
   function sendMessage() {
-    const input = document.getElementById('waMessage');
-    const message = input.value.trim();
+    const message = waMessage.value.trim();
     if (!message) return;
 
-    const userMsg = document.createElement('div');
-    userMsg.className = 'message sent';
-    userMsg.textContent = message;
+    // Tampilkan pesan pengirim di chat
+    const userMsg = createMessage(message, 'sent');
     chatArea.appendChild(userMsg);
-    input.value = '';
+    waMessage.value = '';
     scrollChat();
 
-    // Simpan otomatis
-    let chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
-    chatHistory.push({ type: 'sent', text: message });
-    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+    // Kirim ke Google Form
+    sendToGoogleForm(message);
 
+    // Balasan otomatis
     setTimeout(() => {
-      const botMsg = document.createElement('div');
-      botMsg.className = 'message received';
-      botMsg.textContent = 'Pesan kamu sudah kami terima ✅';
+      const botMsg = createMessage('Terima kasih! Pesanmu sudah kami terima 😊', 'received');
       chatArea.appendChild(botMsg);
-      chatHistory.push({ type: 'received', text: botMsg.textContent });
-      localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
       scrollChat();
     }, 1000);
   }
 
-  document.getElementById('sendBtn').addEventListener('click', sendMessage);
-  document.getElementById('waMessage').addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
-
-  // Load chat history saat reload
-  let chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
-  chatHistory.forEach(msg => {
-    const div = document.createElement('div');
-    div.className = 'message ' + msg.type;
-    div.textContent = msg.text;
-    chatArea.appendChild(div);
+  // Event listeners
+  sendBtn.addEventListener('click', sendMessage);
+  waMessage.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
   });
-  scrollChat();
 
-  // Toggle dark mode
-  const toggle = document.getElementById('modeToggle');
-  toggle.addEventListener('change', () => { document.body.classList.toggle('dark-mode'); });
-
-  // Flower grow only on watering
+  // Flower grow animation
   const stem = document.querySelector('.stem');
   const bud = document.querySelector('.bud');
   const flower = document.querySelector('.flower');
@@ -417,15 +657,82 @@
   function growFlower() {
     stem.style.height = '80px';
     bud.style.transform = 'translateX(-50%) scale(1)';
-    setTimeout(() => { flower.style.transform = 'translateX(-50%) scale(1)'; }, 1500);
+    setTimeout(() => { 
+      flower.style.transform = 'translateX(-50%) scale(1)'; 
+    }, 1500);
   }
 
   can.addEventListener('click', () => {
-    // Water animation
     water.style.opacity = 1;
-    setTimeout(() => { water.style.opacity = 0; }, 500);
-    // Grow flower
+    setTimeout(() => { 
+      water.style.opacity = 0; 
+    }, 500);
     growFlower();
+  });
+
+  // Draggable watering can
+  let isDragging = false;
+  let offsetX, offsetY;
+
+  can.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offsetX = e.clientX - can.getBoundingClientRect().left;
+    offsetY = e.clientY - can.getBoundingClientRect().top;
+    can.style.cursor = 'grabbing';
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    
+    const scene = document.querySelector('.flower-scene');
+    const sceneRect = scene.getBoundingClientRect();
+    
+    let x = e.clientX - sceneRect.left - offsetX;
+    let y = e.clientY - sceneRect.top - offsetY;
+    
+    // Boundary checks
+    x = Math.max(0, Math.min(x, sceneRect.width - can.offsetWidth));
+    y = Math.max(0, Math.min(y, sceneRect.height - can.offsetHeight));
+    
+    can.style.left = `${x}px`;
+    can.style.top = `${y}px`;
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    can.style.cursor = 'grab';
+  });
+
+  // Touch support for mobile
+  can.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    const touch = e.touches[0];
+    offsetX = touch.clientX - can.getBoundingClientRect().left;
+    offsetY = touch.clientY - can.getBoundingClientRect().top;
+    e.preventDefault(); // Prevent scrolling
+  });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    
+    const touch = e.touches[0];
+    const scene = document.querySelector('.flower-scene');
+    const sceneRect = scene.getBoundingClientRect();
+    
+    let x = touch.clientX - sceneRect.left - offsetX;
+    let y = touch.clientY - sceneRect.top - offsetY;
+    
+    // Boundary checks
+    x = Math.max(0, Math.min(x, sceneRect.width - can.offsetWidth));
+    y = Math.max(0, Math.min(y, sceneRect.height - can.offsetHeight));
+    
+    can.style.left = `${x}px`;
+    can.style.top = `${y}px`;
+    e.preventDefault(); // Prevent scrolling
+  });
+
+  document.addEventListener('touchend', () => {
+    isDragging = false;
   });
 </script>
 
